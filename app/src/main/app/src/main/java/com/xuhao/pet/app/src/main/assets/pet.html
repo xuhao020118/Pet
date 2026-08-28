@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      background-color: transparent;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+    }
+    .pet-card {
+      background: rgba(30, 41, 59, 0.95);
+      border: 2px solid #a855f7;
+      border-radius: 16px;
+      padding: 10px;
+      width: 100%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+      text-align: center;
+      color: white;
+      font-family: sans-serif;
+    }
+    .pet-avatar {
+      font-size: 50px;
+      margin: 5px 0;
+    }
+    .stats {
+      font-size: 10px;
+      margin-bottom: 8px;
+    }
+    .actions button {
+      background: #a855f7;
+      border: none;
+      color: white;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="pet-card">
+  <div id="pet-face" class="pet-avatar">😺</div>
+  <div id="status" class="stats">🍗 100% | 💖 100%</div>
+  <div class="actions">
+    <button onclick="feed()">🍗 Cho ăn</button>
+    <button onclick="play()">🎾 Chơi</button>
+  </div>
+</div>
+
+<script>
+  let hunger = 100, happy = 100;
+  
+  function update() {
+    document.getElementById('status').innerText = `🍗 ${hunger}% | 💖 ${happy}%`;
+    if (hunger < 30) document.getElementById('pet-face').innerText = "😿";
+    else if (happy > 80) document.getElementById('pet-face').innerText = "😻";
+    else document.getElementById('pet-face').innerText = "😺";
+  }
+
+  function feed() { hunger = Math.min(100, hunger + 20); update(); }
+  function play() { happy = Math.min(100, happy + 20); hunger = Math.max(0, hunger - 10); update(); }
+
+  setInterval(() => {
+    hunger = Math.max(0, hunger - 2);
+    happy = Math.max(0, happy - 1);
+    update();
+  }, 3000);
+</script>
+
+</body>
+</html>
